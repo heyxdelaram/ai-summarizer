@@ -22,15 +22,17 @@ const Demo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //todo: api req
-    const data = await getSummary({ textUrl: text.url });
+    const { data } = await getSummary({ textUrl: text.url });
 
     if (data?.summary) {
       const newText = { ...text, summary: data.summary };
-      const newAllText = [...allTexts, newText];
+      const newAllTexts = [newText, ...allTexts];
       setText(newText);
-      setAllTexts(newAllText);
-      localStorage.setItem("texts", JSON.stringify(newAllText));
+      setAllTexts(newAllTexts);
+
+      console.log("hello");
+
+      localStorage.setItem("texts", JSON.stringify(newAllTexts));
       console.log(newText);
     }
   };
@@ -75,14 +77,14 @@ const Demo = () => {
             >
               <div className="copy_btn">
                 <img
-                  src="copy"
+                  src={copy}
                   className="w-[40%] h-[40%] object-contain"
                   alt="copy-icon"
                 />
-                <p className="flex-1 font-satoshi text-blue-700 text-sm truncate">
-                  {item.url}
-                </p>
               </div>
+              <p className="flex-1 font-satoshi text-blue-700 text-sm truncate">
+                {text.url}
+              </p>
             </div>
           ))}
         </div>
