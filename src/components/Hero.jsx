@@ -11,7 +11,7 @@ const Hero = () => {
       </nav>
       <h2 className="head_text">
         Summarize Long Text with <br className="max-md:hidden" />
-        <span className="orange_gradient">OpenAI</span>
+        <span className="orange_gradient">OpenAI GPT-4</span>
       </h2>
       <h3 className="desc">
         Simplify your reading with Sumz, an open-source article summarizer that
