@@ -1,16 +1,27 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { copy, linkIcon, loader, tick } from "../assets";
+import { useLazyGetSummaryQuery } from "../services/text";
+
 const Demo = () => {
   const [text, setText] = useState({
     url: "",
     summary: "",
   });
 
+  //since the hook is lazy, the first param is a function for getting the content and the secon is an object which we can get the error and the state of the request by destructuring it
+  const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //api req
-    alert("clicked");
+    //todo: api req
+    const data = await getSummary({ textUrl: text.url });
+
+    if (data?.summary) {
+      const newText = { ...text, summary: data.summary };
+      setText(newText);
+      console.log(newText);
+    }
   };
 
   return (
