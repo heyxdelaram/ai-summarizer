@@ -10,6 +10,8 @@ const Demo = () => {
   });
 
   const [allTexts, setAllTexts] = useState([]);
+  const [copied, setCopied] = useState("");
+
   //since the hook is lazy, the first param is a function for getting the content and the secon is an object which we can get the error and the state of the request by destructuring it
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
 
@@ -37,6 +39,12 @@ const Demo = () => {
     }
   };
 
+  const handleCopy = (copyUrl) => {
+    setCopied(copyUrl);
+    navigator.clipboard.writeText(copyUrl);
+
+    setTimeout(() => setCopied(false), 3000);
+  };
   return (
     <section className="mt-16 w-full max-w-xl">
       {/*Search */}
@@ -75,11 +83,11 @@ const Demo = () => {
               className="link_card"
               onClick={() => setText(text)}
             >
-              <div className="copy_btn">
+              <div onClick={() => handleCopy(text.url)} className="copy_btn">
                 <img
-                  src={copy}
+                  src={copied === text.url ? tick : copy}
                   className="w-[40%] h-[40%] object-contain"
-                  alt="copy-icon"
+                  alt={copied === text.url ? "tick-icon" : "copy-icon"}
                 />
               </div>
               <p className="flex-1 font-satoshi text-blue-700 text-sm truncate">
