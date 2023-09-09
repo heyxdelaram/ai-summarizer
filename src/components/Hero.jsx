@@ -6,7 +6,9 @@ const Hero = () => {
       <nav className="flex w-full mb-10 pt-3 justify-between items-center">
         <img src={logo} alt="sumz-logo" />
         <button
-          onClick={() => window.open("https://github.com/heyxdelaram")}
+          onClick={() =>
+            window.open("https://github.com/heyxdelaram/ai-summarizer.git")
+          }
           className="black_btn"
           type="button"
         >
